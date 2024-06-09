@@ -162,9 +162,8 @@ docker compose -p kitchenpos up -d
 |-----------|--------------|-----------------------------------------------------------------------|
 | 점주  | owner        | 식당 사장님                                                                |
 | 손님  | customer     | 음식점에 음식을 주문하는 고객                                                      |
-| 주문        | order        | 키친포스에 있는 메뉴를 손님이 구매한 것을 의미                                            |
-| 주문 유형     | order type   | 손님이 주문할 수 있는 주문 방식을 의미, 주문 유형은 매장                                     |
 | 매장 주문     | eat in order | 손님이 매장에서 직접하는 주문                                                      |
+| 주문 유형     | order type   | 손님이 주문할 수 있는 주문 방식을 의미, 주문 유형은 매장                                     |
 | 주문 등록     | create order | 손님이 키친포스에 있는 메뉴를 구매하는 행위를 의미                                          |
 | 주문 상태     | order status | 주문이 받아들여지고 나서부터 완료될 때까지의 상태를 의미. 주문 상태는 `접수 대기`, `접수`, `서빙`, `완료` 로 구성 |
 | 접수 대기     | waiting      | 주문이 아직 접수되지 않은 상태                                                     |
@@ -178,11 +177,10 @@ docker compose -p kitchenpos up -d
 |-------|----------------|------------------------------------------------------------------------|
 | 점주    | owner          | 식당 사장님                                                                 |
 | 손님    | customer       | 음식점에 음식을 주문하는 고객                                                       |
-| 주문    | order          | 키친포스에 있는 메뉴를 손님이 구매한 것을 의미                                             |
+| 포장 주문 | take out order | 손님이 주문을 하고 음식이 준비되면 직접 찾으러 가는 주문                                       |
 | 주문 유형 | order type     | 손님이 주문할 수 있는 주문 방식을 의미, 주문 유형은 포장                                      |         
 | 주문 시간 | order time     | 손님이 주문한 시간을 의미                                                         |
 | 주문 항목 | order items    | 손님이 주문한 정보(메뉴, 가격, 금액)를 의미                                                       |
-| 포장 주문 | take out order | 손님이 주문을 하고 음식이 준비되면 직접 찾으러 가는 주문                                       |
 | 주문 등록 | create order   | 손님이 키친포스에 있는 메뉴를 구매하는 행위를 의미                                           |
 | 주문 상태 | order status   | 주문이 받아들여지고 나서부터 완료될 때까지의 상태를 의미. 주문 상태는 `접수 대기`, `접수`, `서빙`, `완료` 로 구성 |
 | 접수 대기 | waiting        | 주문이 아직 접수되지 않은 상태                                                      |
@@ -196,9 +194,8 @@ docker compose -p kitchenpos up -d
 |-----------|-------------------|---------------------------------------------------------------------------------------|
 | 점주  | owner             | 식당 사장님                                                                                |
 | 손님  | customer          | 음식점에 음식을 주문하는 고객                                                                      |
-| 주문        | order             | 키친포스에 있는 메뉴를 손님이 구매한 것을 의미                                                            |
-| 주문 유형     | order type        | 손님이 주문할 수 있는 주문 방식을 의미. 주문 유형은 배달                                        |         
 | 배달 주문     | delivery order    | 손님이 주문을 하면 배달 대행업체를 통해 배달되는 주문                                                        |
+| 주문 유형     | order type        | 손님이 주문할 수 있는 주문 방식을 의미. 주문 유형은 배달                                        |
 | 배달 주소     | delivery address  | 손님이 음식을 받을 주소를 뜻한다. `배달 주문` 의 경우 필요                                                   |
 | 주문 등록     | create order      | 손님이 키친포스에 있는 메뉴를 구매하는 행위를 의미                                                          |
 | 주문 상태     | order status      | 주문이 받아들여지고 나서부터 완료될 때까지의 상태를 의미. 주문 상태는 `접수 대기`, `접수`, `서빙`, `배달 시작`, `배달 완료`, `완료` 로 구성 |
@@ -229,47 +226,44 @@ docker compose -p kitchenpos up -d
 - name은 profanity가 포함되서는 안된다.
 - price는 0 이상이어야 한다.
 - menu products 반드시 한개 이상 존재해야 한다.
-- menu는 changePrice를 할 수 있다.
+- menu는 change price를 할 수 있다.
   - 변경 될 price는 0 이상어야한다.
-  - price는 메뉴 상품 목록의 합보다 클 수 없다.
+  - menu의 price는 menu products의 price 합 보다 클 수 없다.
 - menu는 display를 할 수 있다.
   - display를 할 때 price는 메뉴 상품 목록의 합보다 클 수 없다.
 - menu는 hide를 할 수 있다.
 
 ### 포장 주문
-- order은 식별자, type, status, order time, order item을 가진다.
-- type은 반드시 존재해야 하며 take out이다. 
-- 주문 항목이 존재해야 하며 수량은 0 이상이어야 create order가 된다.
+- take out order은 식별자, type, status, order time, order item을 가진다.
+- order items이 존재해야 하며 수량은 0 이상이어야 create order가 된다.
 - create order을 하게 되면 status가 waiting이 된다.
-- order는 accept를 할 수 있다.
+- take out order는 accept를 할 수 있다.
   - status가 waiting일 때 accept가 가능하다.
-- order는 serve를 할 수 있다.
+- take out order는 serve를 할 수 있다.
   - status가 accept일 때 serve가 가능하다.
-- order는 complete를 할 수 있다.
+- take out order는 complete를 할 수 있다.
   - status가 serve일 때 complete가 된다.
 - 주문 항목과 메뉴 항목의 가격을 비교할 수 있다.
 
 ### 배달 주문
-- order은 식별자, type, status, order time, order item, DeliveryAddress를 가진다.
-- type은 반드시 존재해야 하며 delivery이다.
+- delivery order은 식별자, type, status, order time, order item, DeliveryAddress를 가진다.
 - 주문 항목이 존재 해야 하며 수량은 0 이상이어야 하며 배송지 정보가 있어야 create order가 된다.
 - create order을 하게 되면 status가 waiting이 된다.
-- order는 accept를 할 수 있다.
-  - order의 status가 waiting일 때 call delivery를 한다.
-  - order의 status가 waiting일 때 accept가 가능하다.
-- order는 serve를 할 수 있다.
+- delivery order는 accept를 할 수 있다.
+  - delivery order의 status가 waiting일 때 call delivery를 한다.
+  - delivery order의 status가 waiting일 때 accept가 가능하다.
+- delivery order는 serve를 할 수 있다.
   - status가 accept일 때 serve로 변경된다.
-- order는 start delivery를 한다.
+- delivery order는 start delivery를 한다.
   - status가 serve일 때 start delivery가 가능하다.
-- order는 complete delivery를 할 수 있다.
+- delivery order는 complete delivery를 할 수 있다.
   - status가 start delivery일 때 complete delivery가 가능하다.
-- order는 complete를 할 수 있다.
+- delivery order는 complete를 할 수 있다.
   - status가 complete delivery일 때 complete가 가능하다.
 
 ### 매장 주문
 - eat in order은 식별자, type, status, order time, order item, table 식별자를 가진다.
-- type은 반드시 존재해야 하며 eat in이다.
-- 주문 항목이 존재해야 하며 sit table이어야 create eat in order가 된다.
+- order items이 존재해야 하며 sit table이어야 create eat in order가 된다.
 - eat in order는 accept를 할 수 있다.
   - status가 waiting일 때 accept가 가능하다.
 - eat in order는 server를 할 수 있다.
