@@ -1,9 +1,7 @@
 package kitchenpos.application;
 
-import kitchenpos.domain.Order;
-import kitchenpos.domain.OrderRepository;
-import kitchenpos.domain.OrderStatus;
-import kitchenpos.domain.OrderTable;
+
+import kitchenpos.eatinorder.domain.OrderTable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-public class InMemoryOrderRepository implements OrderRepository {
+public class InMemoryOrderRepository {
+    /*
     private final Map<UUID, Order> orders = new HashMap<>();
 
     @Override
@@ -37,4 +36,5 @@ public class InMemoryOrderRepository implements OrderRepository {
             .stream()
             .anyMatch(order -> order.getOrderTable().equals(orderTable) && order.getStatus() != status);
     }
+    */
 }
