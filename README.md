@@ -15,7 +15,7 @@ docker compose -p kitchenpos up -d
 - 상품의 가격이 올바르지 않으면 등록할 수 없다.
     - 상품의 가격은 0원 이상이어야 한다.
 - 상품의 이름이 올바르지 않으면 등록할 수 없다.
-    - 상품의 이름에는 비속어가 포함될 수 없다.
+    - 상품의 이름에는 `Profanity`가 포함될 수 없다.
 - 상품의 가격을 변경할 수 있다.
 - 상품의 가격이 올바르지 않으면 변경할 수 없다.
     - 상품의 가격은 0원 이상이어야 한다.
@@ -39,7 +39,7 @@ docker compose -p kitchenpos up -d
 - 메뉴에 속한 상품 금액의 합은 메뉴의 가격보다 크거나 같아야 한다.
 - 메뉴는 특정 메뉴 그룹에 속해야 한다.
 - 메뉴의 이름이 올바르지 않으면 등록할 수 없다.
-    - 메뉴의 이름에는 비속어가 포함될 수 없다.
+    - 메뉴의 이름에는 `Profanity`가 포함될 수 없다.
 - 메뉴의 가격을 변경할 수 있다.
 - 메뉴의 가격이 올바르지 않으면 변경할 수 없다.
     - 메뉴의 가격은 0원 이상이어야 한다.
@@ -188,7 +188,7 @@ docker compose -p kitchenpos up -d
 ## 상품
 **속성**
 - `Product`는 식별자, `Name`, `Price`를 가진다.
-- `Name`은 필수이며, 비속어를 포함하지 않아야한다.
+- `Name`은 필수이며, `Profanity`를 포함하지 않아야한다.
 - `Price`는 0원 이상이어야한다.
 
 **행위**
@@ -207,7 +207,7 @@ docker compose -p kitchenpos up -d
 ### 메뉴
 **속성**
 - `Menu`는 식별자, `Name`, `Price`, `MenuGroup`식별자, `MenuProduct`목록, `MenuStatus`를 가진다.
-- `Name`은 필수이며, 비속어를 포함하지 않아야한다.
+- `Name`은 필수이며, `Profanity`를 포함하지 않아야한다.
 - `Price`는 0원 이상이어야한다.
 - `MenuGroup` 식별자는 등록된 `MenuGroup`의 식별자여야한다.
 - `MenuProduct`는 1개 이상이어야한다.
@@ -249,7 +249,7 @@ docker compose -p kitchenpos up -d
 **속성**
 - `Order`는 `OrderType`이 `EAT_IN`이며 `OrderStatus`, `주문시간`, `OrderLineItem`목록, `OrderTable`을 가진다.
 - `OrderStatus`는 `WAITING`부터 시작한다.
-- `OrderTable`이 필수이며 `TableStatus`가 sit`이어야한다.
+- `OrderTable`이 필수이며 `TableStatus`가 `sit`이어야한다.
 - `OrderLineItem`은 1개 이상 필요하다.
 - `OrderLineItem`의 `Menu`는 `MenuStatus`가 `Display`여야한다.
 
@@ -277,6 +277,7 @@ docker compose -p kitchenpos up -d
 - `OrderStatus`를 `ACCEPTED`로 변경한다.
   - `OrderStatus`는 `WAITING`이어야한다. 
   - 배달 대행 업체에 배달을 요청한다.
+    - 배달을 요청할 때 주문번호, 주문금액, 배달주소가 필요하다.
 - `OrderStatus`를 `SERVED`로 변경한다.
   - `OrderStatus`는 `ACCEPTED`이어야한다.
 - `OrderStatus`를 `DELIVERING`로 변경한다.

@@ -1,7 +1,7 @@
 package kitchenpos.application;
 
-import kitchenpos.domain.MenuGroup;
-import kitchenpos.domain.MenuGroupRepository;
+import kitchenpos.menu.domain.menu_group.MenuGroup;
+import kitchenpos.menu.domain.menu_group.MenuGroupRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
