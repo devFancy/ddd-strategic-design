@@ -168,7 +168,7 @@ docker compose -p kitchenpos up -d
     - [] : 자신이 이용하고 있는(앉아있는) 매장 테이블에서만 매장 식사를 할 수 있다.
         - [] : 매장 이용 시 주문한 테이블에 앉아 있어야 한다.
 
-    - 매장 식사 주문의 전체적인 순서 
+    - 매장 식사 주문의 전체적인 순서  
         - [] : 1. 주문 대기 중 (waiting) => 주문 대기 중일 때만 주문을 접수할 수 있다.
         - [] : 2. 주문 접수 완료 (accepted)
         - [] : 3. 서빙 완료 (served)
@@ -196,12 +196,6 @@ docker compose -p kitchenpos up -d
 |-----|---------|------------------------|
 | 상품  | product | `상품`은 `메뉴`를 구성하는 단위이다. |
 
-### 메뉴 상품 (Menu Product)
-
-| 한글명   | 영문명          | 설명             |
-|-------|--------------|----------------|
-| 메뉴 상품 | menu-product | 단일 `상품`의 그룹이다. |
-
 ### 메뉴 카테고리 (Menu Group)
 
 | 한글명     | 영문명        | 설명          |
@@ -210,37 +204,47 @@ docker compose -p kitchenpos up -d
 
 ### 메뉴 (Menu)
 
-| 한글명   | 영문명             | 설명                                                  |
-|-------|-----------------|-----------------------------------------------------|
-| 메뉴    | menu            | `주문`을 구성하는 최소한의 단위이다.                               |
-| 메뉴 게시 | menu display    | `메뉴`를 `주문`할 수 있는지에 대한 여부이다.                         |
-| 마진    | margin          | `메뉴`가격이 `메뉴`를 이루는 `상품`들의 가격의 총합보다 높은 것을 말한다.        |
-| 메뉴 검증 | menu validation | `메뉴`의 `상품`들과 `메뉴 카테고리`의 구성이 동일하게 존재하는지 확인하는 것을 말한다. |
+| 한글명   | 영문명             | 설명                                              |
+|-------|-----------------|-------------------------------------------------|
+| 메뉴    | menu            | `주문`을 구성하는 최소한의 단위이다.                           |
+| 메뉴 게시 | menu display    | `메뉴`를 `주문`할 수 있는지에 대한 여부이다.                     |
+| 마진    | margin          | `메뉴`가격이 `메뉴`를 이루는 `상품`들의 가격의 총합보다 높은 것을 말한다.    |
+| 메뉴 검증 | menu validation | `메뉴`의 `상품`들과 메뉴 상품의 구성이 동일하게 존재하는지 확인하는 것을 말한다. |
+| 메뉴 상품 | menu-product    | 단일 `상품`의 그룹이다.                                  |
 
 ### 매장 테이블 (Order Table)
 
-| 한글명    | 영문명         | 설명                              |
-|--------|-------------|---------------------------------|
-| 매장 테이블 | order-table | `매장 테이블`은 `매장 주문`을 할 수 있는 장소이다. |
-| 앉기     | sit         | `매장 테이블`을 `손님`이 점유한다.           |
-| 청소하기   | clear       | `매장 주문 완료`시에 `매장 테이블`을 청소한다.    |
+| 한글명          | 영문명             | 설명                                  |
+|--------------|-----------------|-------------------------------------|
+| 매장 테이블       | order-table     | `매장 테이블`은 `매장 주문`을 할 수 있는 장소이다.     |
+| 앉기           | sit             | `매장 테이블`을 `손님`이 점유한다.               |
+| 점유 상태 해지     | release table   | `매장 주문 완료`시에 `매장 테이블의 점유 상태`를 해지한다. |
+| 매장 테이블 점유 상태 | table occupancy | `매장 테이블`을 `손님`이 점유한 상태를 말한다.        |
 
 ### 주문 (Order)
 
-| 한글명   | 영문명              | 설명                                                                  |
-|-------|------------------|---------------------------------------------------------------------|
-| 주문    | order            | `주문`은 `게시`된 `메뉴`를 구매하는 것이다.                                         |
-| 주문 유형 | order type       | `배달 주문`, `포장 주문`, `매장 주문`로 구성된 `주문`의 유형이다.                          |
-| 주문 상태 | order status     | 현재 확인 가능한 `주문`의 상태이다.(주문 대기 중, 주문 접수 완료, 서빙 완료, 배달 중, 배달 완료, 주문 완료) |
-| 주문 검증 | order validation | `주문` 내역에 수량, 가격 구성과 `주문`한 `메뉴`들의 수량, 가격 구성이 동일하게 존재하는지 검증한다.        |
-| 손님    | guest            | `주문`을 목적으로 하는 사람이다.                                                 |
+| 한글명      | 영문명              | 설명                                                                  |
+|----------|------------------|---------------------------------------------------------------------|
+| 주문       | order            | `주문`은 `게시`된 `메뉴`를 구매하는 것이다.                                         |
+| 주문 유형    | order type       | `배달 주문`, `포장 주문`, `매장 주문`로 구성된 `주문`의 유형이다.                          |
+| 주문 상태    | order status     | 현재 확인 가능한 `주문`의 상태이다.(주문 대기 중, 주문 접수 완료, 서빙 완료, 배달 중, 배달 완료, 주문 완료) |
+| 주문 검증    | order validation | `주문` 내역에 수량, 가격 구성과 `주문`한 `메뉴`들의 수량, 가격 구성이 동일하게 존재하는지 검증한다.        |
+| 손님       | guest            | `주문`을 목적으로 하는 사람이다.                                                 |
+| 주문 생성 시간 | order time       | `손님`이 주문한 시간이다.                                                     |
+
+### 유저 (User)
+
+| 한글명 | 영문명         | 설명                  |
+|-----|-------------|---------------------|
+| 손님  | guest       | `주문`을 목적으로 하는 사람이다. |
+| 사장님 | store owner | `메뉴`를 만드는 사람이다.     |
 
 ### 배달 주문 (Delivery)
 
 | 한글명         | 영문명                       | 설명                                                                                    |
 |-------------|---------------------------|---------------------------------------------------------------------------------------|
 | 배달 주문       | delivery order            | `주문 유형`이 `배달 주문`인 `주문`을 말한다.                                                          |
-| 배달 순서       | delivery flow             | `배달 주문`의 과정의 흐름을 말한다.(배달 주문 대기 - 배달 주문 접수 완료 - 배달 주문 서빙 완료 - 배달 중 - 배달 완료 - 배달 주문 완료) |
+| 배달 순서       | delivery order flow       | `배달 주문`의 과정의 흐름을 말한다.(배달 주문 대기 - 배달 주문 접수 완료 - 배달 주문 서빙 완료 - 배달 중 - 배달 완료 - 배달 주문 완료) |
 | 배달 주문 대기    | delivery order waiting    | `손님`이 `배달 주문`을 한 상태이다.                                                                |
 | 배달 주문 접수 완료 | delivery order accepted   | `배달 기사`가 `배달 주문`을 수락한 상태이다.                                                           |
 | 배달 주문 서빙 완료 | delivery order served     | 조리가 완료된 음식을 `배달 기사`에게 제공한 상태이다.                                                       |
@@ -253,7 +257,7 @@ docker compose -p kitchenpos up -d
 | 한글명         | 영문명                     | 설명                                                                     |
 |-------------|-------------------------|------------------------------------------------------------------------|
 | 포장 주문       | takeout order           | `주문 유형`이 `포장 주문`인 `주문`을 말한다.                                           |
-| 포장 순서       | takeout flow            | `포장 주문`의 과정의 흐름을 말한다.(포장 주문 대기 → 포장 주문 접수 완료 → 포장 주문 서빙 완료 → 포장 주문 완료) |
+| 포장 순서       | takeout order flow      | `포장 주문`의 과정의 흐름을 말한다.(포장 주문 대기 → 포장 주문 접수 완료 → 포장 주문 서빙 완료 → 포장 주문 완료) |
 | 포장 주문 대기    | takeout order waiting   | `손님`이 `포장 주문`을 한 상태이다.                                                 |
 | 포장 주문 접수 완료 | takeout order accepted  | `포장 주문`을 수락한 상태이다.                                                     |
 | 포장 주문 서빙 완료 | takeout order served    | `손님`에게 조리가 완료된 음식을 제공한 상태이다.                                           |
@@ -264,17 +268,19 @@ docker compose -p kitchenpos up -d
 | 한글명         | 영문명                    | 설명                                                                     |
 |-------------|------------------------|------------------------------------------------------------------------|
 | 매장 주문       | eat-in order           | `주문 유형`이 `매장 주문`인 `주문`을 말한다.                                           |
-| 매장 주문 순서    | eat-in flow            | `매장 주문`의 과정의 흐름을 말한다.(매장 주문 대기 - 매장 주문 접수 완료 - 매장 주문 서빙 완료 - 매장 주문 완료) |
-| 매장 주문 대기    | eat-in order waiting   | `매장 테이블`에 `앉은 손님`이 `매장 주문`을 한 상태이다.                                    |
+| 매장 주문 순서    | eat-in order flow      | `매장 주문`의 과정의 흐름을 말한다.(매장 주문 대기 - 매장 주문 접수 완료 - 매장 주문 서빙 완료 - 매장 주문 완료) |
+| 매장 주문 대기    | eat-in order waiting   | `매장 테이블`을 `점유`하고 있는 `손님`이 `매장 주문`을 한 상태이다.                             |
 | 매장 주문 접수 완료 | eat-in order accepted  | `매장 주문`을 수락한 상태이다.                                                     |
 | 매장 주문 서빙 완료 | eat-in order served    | `손님`에게 조리가 완료된 음식을 제공한 상태이다.                                           |
-| 매장 주문 완료    | eat-in order completed | `매장 순서`가 종료된 상태로 `매장 테이블`을 `청소`한다.                                     |
+| 매장 주문 완료    | eat-in order completed | `매장 순서`가 종료된 상태로 `매장 테이블`의 `점유 상태를 해지`한다.                              |
 
-### 주문 내역 (Order Item Line)
+### 주문 내역 (Order Line Item)
 
-| 한글명   | 영문명             | 설명                              |
-|-------|-----------------|---------------------------------|
-| 주문 내역 | order item line | `주문 내역`은 단일`주문`한 `메뉴`에 대한 그룹이다. |
+| 한글명       | 영문명                      | 설명                              |
+|-----------|--------------------------|---------------------------------|
+| 주문 내역     | order line item          | `주문 내역`은 단일`주문`한 `메뉴`에 대한 그룹이다. |
+| 주문 내역의 가격 | order line item price    | 단일`주문` 메뉴의 `수량`에 따른 총 가격이다.     |
+| 주문 내역의 수량 | order line item quantity | 단일`주문` 메뉴의 총 수량이다.              |
 
 ### 외부 시스템 (external System)
 
@@ -284,3 +290,166 @@ docker compose -p kitchenpos up -d
 | 배달 기사      | kitchen riders client | 배달 서비스를 제공한다.   |
 
 ## 모델링
+
+### 1. 메뉴
+
+- `메뉴`는 여러 `상품` 과 `메뉴 게시`를 가진다.
+- `메뉴`는 상품의 가격과 수량을 토대로 `마진`을 검증한다.
+
+### 2. 외부 시스템
+
+- `비속어 검증 시스템`은 비속어를 검증한다.
+- `배달 기사`는 배달 정보를 받아 배달을 간다.
+
+### 3. 주문
+
+- `주문`은 주문 방식을 구별할 수 있는 `주문 유형`을 가진다.
+- `주문`은 여러 `메뉴`를 가진다.
+- `주문`은 손님이 원하는 `주문 유형`에 따라 `주문`을 수행한다.
+- `주문`은 `주문 내역`을 토대로 `주문`을 검증한다.
+
+### 4. 유저
+
+- `손님`은 `주문`을 한다.
+- `손님`은 `매장 테이블`을 `점유`한다.
+- `사장님`은 `메뉴`를 만든다.
+
+### 5. 배달 주문
+
+- `배달 주문`은 `배달 기사`에게 배달을 요청한다.
+- `배달 주문`은 현재 `배달 주문 상태`를 기반으로 `배달 주문 순서`에게 다음 순서의 `배달 주문`을 요청한다.
+- `배달 주문 순서`는 이전 `배달 주문 상태`와 `배달 주문 순서`를 고려해 다음 순서의 `배달 주문`을 수행한다.
+
+### 6. 포장 주문
+
+- `포장 주문`은 `손님`에게 조리된 음식을 포장 해준다.
+- `포장 주문`은 현재 `포장 주문 상태`를 기반으로 `포장 주문 순서`에게 다음 순서의 `포장 주문`을 요청한다.
+- `포장 주문 순서`는 이전 `포장 주문 상태`와 `포장 주문 순서`를 고려해 다음 순서의 `포장 주문`을 수행한다.
+
+### 7. 매장 주문
+
+- `매장 주문`은 `매장 테이블을 점유`한 `손님`에게 조리된 음식을 제공한다.
+- `매장 주문`은 현재 `매장 주문 상태`를 기반으로 `매장 주문 순서`에게 다음 순서의 `매장 주문`을 요청한다.
+- `매장 주문 순서`는 이전 `매장 주문 상태`와 `매장 주문 순서`를 고려해 다음 순서의 `매장 주문`을 수행한다.
+
+### 8. 매장 테이블
+
+- `매장 테이블`은 `매장 주문이 완료`되면 `테이블 점유를 해지`한다.
+
+### Kitchen Pos 모델링
+
+```mermaid
+flowchart TD
+    guest
+    store_owner
+%% 외부 시스템 (ID: externalSystem)	
+    subgraph externalSystem [외부 시스템]
+        KitchenRidersClient
+        PurgomalumClient
+    end
+
+    style externalSystem stroke-dasharray: 5  
+%% 메뉴
+    subgraph 메뉴
+        style 주문 stroke-dasharray: 5
+        menu
+        product
+        menu --> product
+    end
+
+%% 주문
+    subgraph 주문
+        style 주문 stroke-dasharray: 5
+        order
+        deliveryOrder
+        takeOutOrder
+        eatInOrder
+        DeliveryOrderFlow
+        TakeOutOrderFlow
+        EatInOrderFlow
+        OrderTable
+        order -- case:delivery orderType --> deliveryOrder
+        order -- case:takeOut orderType --> takeOutOrder
+        order -- case:eatIn orderType --> eatInOrder
+        deliveryOrder -- 배달 주문 시작 --> DeliveryOrderFlow
+        takeOutOrder -- 포장 주문 시작 --> TakeOutOrderFlow
+        eatInOrder -- 매장 주문 시작 --> EatInOrderFlow
+        EatInOrderFlow -- 매장 테이블 해지 요청 --> OrderTable
+    end
+
+    guest -- <순서 2> : 주문 요청 --> order
+    guest -- 매장 테이블 점유 --> OrderTable
+    guest -- <순서 1> : 메뉴 선택 --> menu
+    store_owner -- 메뉴 생성 --> menu
+    DeliveryOrderFlow -- 배달 요청 --> KitchenRidersClient
+    menu -- 비속어 검증 --> PurgomalumClient
+    product -- 비속어 검증 --> PurgomalumClient
+
+```
+
+### 배달 주문 순서
+
+```mermaid
+sequenceDiagram
+    participant Guest
+    participant Delivery Order
+    participant Delivery Order Flow
+    participant Kitchen Riders Client
+    Guest ->> Delivery Order: 배달 주문 요청
+    Delivery Order ->> Delivery Order Flow: 배달 주문 프로세스 시작
+    Delivery Order Flow ->> Delivery Order: 배달 주문 대기 중
+    Delivery Order ->> Delivery Order Flow: 배달 주문 접수 요청
+    Delivery Order Flow -->> Kitchen Riders Client: 배달 요청
+    Delivery Order Flow ->> Delivery Order: 배달 접수 완료
+    Kitchen Riders Client -->> Delivery Order Flow: 배달 요청 확인
+    Delivery Order ->> Delivery Order Flow: 배달 주문 서빙 요청
+    Delivery Order Flow ->> Delivery Order: 배달 주문 서빙 완료
+    Delivery Order ->> Delivery Order Flow: 배달 중 요청
+    Delivery Order Flow ->> Delivery Order: 배달 중
+    Delivery Order ->> Delivery Order Flow: 배달 완료 요청
+    Delivery Order Flow ->> Delivery Order: 배달 완료
+    Delivery Order ->> Delivery Order Flow: 배달 주문 완료 요청
+    Delivery Order Flow ->> Delivery Order: 배달 주문 완료
+
+```
+
+### 포장 주문 순서
+
+```mermaid
+sequenceDiagram
+    participant Guest
+    participant TakeOut Order
+    participant TakeOut Order Flow
+    Guest ->> TakeOut Order: 포장 주문 요청
+    TakeOut Order ->> TakeOut Order Flow: 포장 주문 프로세스 시작
+    TakeOut Order Flow ->> TakeOut Order: 포장 주문 대기 중
+    TakeOut Order ->> TakeOut Order Flow: 포장 주문 접수 요청
+    TakeOut Order Flow ->> TakeOut Order: 포장 접수 완료
+    TakeOut Order ->> TakeOut Order Flow: 포장 주문 서빙 요청
+    TakeOut Order Flow ->> TakeOut Order: 포장 주문 서빙 완료
+    TakeOut Order ->> TakeOut Order Flow: 포장 주문 완료 요청
+    TakeOut Order Flow ->> TakeOut Order: 포장 주문 완료
+
+```
+
+### 매장 주문 순서
+
+```mermaid
+sequenceDiagram
+    participant Guest
+    participant EatIn Order
+    participant EatIn Order Flow
+    participant OrderTable
+    Guest ->> EatIn Order: 매장 주문 요청
+    EatIn Order ->> EatIn Order Flow: 매장 주문 프로세스 시작
+    EatIn Order Flow ->> EatIn Order: 매장 주문 대기 중
+    EatIn Order ->> EatIn Order Flow: 매장 주문 접수 요청
+    EatIn Order Flow ->> EatIn Order: 매장 접수 완료
+    EatIn Order ->> EatIn Order Flow: 매장 주문 서빙 요청
+    EatIn Order Flow ->> EatIn Order: 매장 주문 서빙 완료
+    EatIn Order ->> EatIn Order Flow: 매장 주문 완료 요청
+    EatIn Order Flow -->> OrderTable: 매장 테이블 점유 해제 요청
+    EatIn Order Flow ->> EatIn Order: 매장 주문 완료
+    OrderTable -->> EatIn Order Flow: 매장 테이블 점유 해제
+
+```
