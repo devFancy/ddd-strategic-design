@@ -483,6 +483,7 @@ erDiagram
 - 주문 완료 후 해당 테이블에 진행 중인 주문이 없으면
   - 손님 수(`numberOfGuests`)를 0으로 설정한다.
   - 테이블을 비어 있음(occupied=false) 상태로 변경한다.
+- 주문 항목(`OrderLineItem`)의 수량은 기존 `Order`를 취소하거나 변경해도 수정되지 않기 때문에 0보다 적을 수 있다.
 
 ### 포장 주문 (TAKEOUT)
 
@@ -502,6 +503,7 @@ erDiagram
 
 #### 정책(제약사항)
 - 주문 유형이 포장(`TAKEOUT`)인 경우, 주문 항목의 수량은 0보다 커야 한다.
+- 주문 항목(`OrderLineItem`)의 수량은 0보다 커야 한다.
 
 ### 배달 주문 (DELIVERY)
 
@@ -526,3 +528,4 @@ erDiagram
 - 주문이 접수되면 배달 대행사(`delivery agency`)가 호출된다.
 - 배달을 시작하면 주문 상태를 배달 중(`DELIVERING`)으로 변경한다.
 - 배달이 완료되면 주문 상태를 배달 완료(`DELIVERED`)로 변경한다.
+- 주문 항목(`OrderLineItem`)의 수량은 0보다 커야 한다.
