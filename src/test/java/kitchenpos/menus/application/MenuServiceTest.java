@@ -20,7 +20,6 @@ import kitchenpos.products.infra.PurgomalumClient;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.assertj.core.api.AssertionsForInterfaceTypes;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,6 +30,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 class MenuServiceTest {
 
